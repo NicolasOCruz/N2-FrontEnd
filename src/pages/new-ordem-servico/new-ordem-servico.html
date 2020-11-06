@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Nova Ordem de Serviço</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+      <form [formGroup]= "formSearch">
+        <ion-item>
+          <ion-label stacked>CPF/CNPJ do Cliente*</ion-label>
+          <ion-input formControlName="cliente" type="text" [(ngModel)]="clienteCpfOrCnpj" maxlength="14" (focusout)="findCliente()"></ion-input>
+        </ion-item>
+        <p *ngIf="formSearch.controls['cliente'].dirty && formSearch.controls['cliente'].errors" margin-left>CPF/CNPJ inválido</p>
+        <ion-item>
+          <ion-label stacked>Cliente</ion-label>
+          <ion-input formControlName="nome" type="text" readonly></ion-input>
+        </ion-item>
+      </form>
+      <form [formGroup]= "formGroup" (ngSubmit)="next(); $event.preventDefault()">
+        <ion-item>
+          <ion-label stacked>Descrição*</ion-label>
+          <ion-input formControlName="descricao" type="text"></ion-input>
+        </ion-item>
+        <p *ngIf="formGroup.controls['descricao'].dirty && formGroup.controls['descricao'].errors" margin-left>Email inválido</p>
+        <ion-item>
+          <ion-label stacked>Preço*</ion-label>
+          <ion-input formControlName="preco" type="text"></ion-input>
+        </ion-item>
+        <p *ngIf="formGroup.controls['preco'].dirty && formGroup.controls['preco'].errors" margin-left>Preço inválido</p>
+        <button ion-button block type="submit" [disabled]="formGroup.invalid || formSearch.invalid">Próximo</button>
+      </form>
+</ion-content>

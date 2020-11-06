@@ -1,0 +1,22 @@
+<!--
+  Generated template for the AddComentarioPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>Adicionar Comentários</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]= "formGroup" (ngSubmit)="add(); $event.preventDefault()">
+    <ion-item>
+      <ion-label stacked>Insira o comentário*</ion-label>
+      <ion-input formControlName="descricao" type="text"></ion-input>
+    </ion-item>
+    <p *ngIf="formGroup.controls['descricao'].dirty && formGroup.controls['descricao'].errors" margin-left>Comentário inválido</p>
+    <button ion-button block type="submit" [disabled]="formGroup.invalid">Anexar comentário</button>
+  </form>
+</ion-content>

@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Signup</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <form [formGroup]= "formGroup" (ngSubmit)="updateUser(); $event.preventDefault()">
+        <ion-item>
+          <ion-label stacked>Nome*</ion-label>
+          <ion-input formControlName="nome" type="text"></ion-input>
+        </ion-item>
+        <p *ngIf="formGroup.controls['nome'].dirty && formGroup.controls['nome'].errors" margin-left>Nome inválido</p>
+        <ion-item>
+          <ion-label stacked>Email*</ion-label>
+          <ion-input formControlName="email" type="text"></ion-input>
+        </ion-item>
+        <p *ngIf="formGroup.controls['email'].dirty && formGroup.controls['email'].errors" margin-left>Email inválido</p>
+        <h4 style="text-align: center;">Adicionar endereço</h4>
+        <ion-item>
+          <ion-label stacked>Logradouro</ion-label>
+          <ion-input formControlName="logradouro" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>Número</ion-label>
+          <ion-input formControlName="numero" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>Complemento</ion-label>
+          <ion-input formControlName="complemento" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>Bairro</ion-label>
+          <ion-input formControlName="bairro" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>CEP</ion-label>
+          <ion-input formControlName="cep" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>Estado*</ion-label>
+          <ion-select formControlName="estadoId" (ionChange)="updateCidades()">
+            <ion-option *ngFor="let estado of estados; first as f" [value]="estado.id" [selected]="f">{{estado.nome}}</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>Cidade*</ion-label>
+          <ion-select formControlName="cidadeId">
+            <ion-option *ngFor="let cidade of cidades" [value]="cidade.id">{{cidade.nome}}</ion-option>
+          </ion-select>
+        </ion-item>
+        <button ion-button block type="submit" [disabled]="formGroup.invalid">Atualizar</button>
+      </form>
+</ion-content>

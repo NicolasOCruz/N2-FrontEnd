@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Clientes</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-list>
+    <button ion-item *ngFor="let cliente of clientes" (click)="showDetail(cliente.id)">
+      <ion-thumbnail item-start>
+        <img [src]="cliente.imageUrl || 'assets/imgs/avatar-blank.png'">
+      </ion-thumbnail>
+      <h2><b>{{ cliente.nome }}</b></h2>
+      <p> {{ cliente.email }} </p>
+    </button>
+  </ion-list>
+</ion-content>

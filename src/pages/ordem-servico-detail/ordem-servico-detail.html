@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Detalhes</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card>
+    <img [src]="ordem?.imageUrl || 'assets/imgs/blank.jpg'">
+    <ion-card-content>
+      <ion-card-title style="text-align: center;">
+        {{ ordem?.descricao }}
+      </ion-card-title>
+      <h2>
+        <span><b>Preço: </b></span>
+        {{ ordem?.preco | currency }}
+      </h2>
+      <p>
+        <span><b>Status: </b></span>
+        {{ ordem?.status }}
+      </p>
+      <p>
+        <span><b>Cliente: </b></span>{{ ordem?.cliente.nome }}
+      </p>
+      <p>
+        <span><b>Data de Abertura: </b></span>
+        {{ ordem?.dataAbertura | date: 'dd/MM/yyyy HH:mm' }}
+      </p>
+      <p *ngIf="ordem?.dataFinalizacao">
+        <span><b>Data de Finalização: </b></span>
+        {{ ordem?.dataFinalizacao | date: 'dd/MM/yyyy HH:mm' }}
+      </p>
+      <br>
+      <ion-card *ngIf="thereIsComents">
+        <h2 style="text-align: center;"><span>Comentários: </span></h2>
+        <div *ngFor="let comentario of comentarios">
+          <br>
+          <p>{{ comentario.dataEnvio | date: 'dd/MM/yyyy HH:mm' }}</p>
+          <p>{{ comentario.descricao }}</p>
+          <div style="border-bottom: 1px solid gray;" ></div>
+        </div>
+      </ion-card>
+    </ion-card-content>
+  </ion-card>
+  <div *ngIf="auth.checkAdmin()">
+    <button ion-button block outline (click)="insert(ordem.id)">Adicionar comentário</button>
+    <button ion-button block outline class="cancelar" (click)="cancelar(ordem.id)" *ngIf="!finalizada && !cancelada">Cancelar</button>
+    <button ion-button block (click)="finalizar(ordem.id)" *ngIf="!finalizada && !cancelada">Finalizar</button>
+  </div>
+</ion-content>

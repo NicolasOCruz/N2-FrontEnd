@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Administração</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div *ngIf="auth.checkAdmin()">
+    <div class="first">
+      <img src="./../../assets/imgs/fundo.png" alt="logo">
+    </div>
+    <div class="second">
+      <button ion-button block outline (click)="novo()">Novo Cliente</button>
+      <button ion-button block outline (click)="listarClientes()">Listar Clientes</button>
+      <button ion-button block outline (click)="novaOrdem()">Nova Ordem de Serviço</button>
+      <button ion-button block outline (click)="listarOrdens()">Listar Ordens de Serviço</button>
+    </div>
+  </div>
+</ion-content>

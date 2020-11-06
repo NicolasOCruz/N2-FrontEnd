@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Esqueci a senha</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="formGroup" (ngSubmit)="forgot(); $event.preventDefault()">
+    <ion-item>
+      <ion-label stacked>Digite o email cadastrado</ion-label>
+      <ion-input formControlName="email" type="text"></ion-input>
+    </ion-item>
+    <p *ngIf="formGroup.controls['email'].dirty && formGroup.controls['email'].errors" margin-left>Email inválido</p>
+    <button ion-button block type="submit" [disabled]="formGroup.invalid">Enviar email</button>
+  </form>
+
+</ion-content>

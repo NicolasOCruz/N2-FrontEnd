@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Detalhes</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card>
+    <img [src]="cliente?.imageUrl || 'assets/imgs/avatar-blank.png'">
+    <ion-card-content>
+      <ion-card-title style="text-align: center;">
+        {{ cliente?.nome }}
+      </ion-card-title>
+      <h2>
+        <span><b>Telefone: </b></span>
+        {{ cliente?.telefone }}
+      </h2>
+      <p>
+        <span><b>Email: </b></span>
+        {{ cliente?.email }}
+      </p>
+      <p>
+        <span><b>CPF/CNPJ: </b></span>
+        {{ cliente?.cpf }}
+      </p>
+    </ion-card-content>
+    <ion-card>
+      <h2 style="text-align: center;"><span>Endereço(s): </span></h2>
+      <div *ngFor="let endereco of enderecos">
+        <br>
+        <p><span><b>Logradouro: </b></span>{{ endereco.logradouro}}</p>
+        <p><span><b>Número: </b></span>{{ endereco.numero}}</p>
+        <p><span><b>Complemento: </b></span>{{ endereco.complemento}}</p>
+        <p><span><b>Bairro: </b></span>{{ endereco.bairro}}</p>
+        <p><span><b>CEP: </b></span>{{ endereco.cep}}</p>
+        <p><span><b>Cidade: </b></span>{{ endereco.cidade.nome}}</p>
+        <p><span><b>Estado: </b></span>{{ endereco.cidade.estado.nome}}</p>
+        <div style="border-bottom: 1px solid gray;" ></div>
+      </div>
+    </ion-card>
+  </ion-card>
+
+  <button ion-button block outline (click)="update(cliente.id)" class="atualizar">Atualizar</button>
+  <button ion-button block (click)="delete(cliente.id)">Excluir</button>
+</ion-content>

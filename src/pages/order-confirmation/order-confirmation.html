@@ -1,0 +1,77 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title *ngIf="codordemServico">Ordem de Serviço registrada!</ion-title>
+    <ion-title *ngIf="!codordemServico">Confira os dados</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <div *ngIf="!codordemServico">
+    <ion-card>
+      <ion-card-header>
+        Detalhes da Ordem de Serviço
+      </ion-card-header>
+      <ion-item>
+        <h2>{{ordemServico?.descricao}}</h2>
+        <p>{{ordemServico?.preco | currency}}</p>
+      </ion-item>
+    </ion-card>
+    <ion-card>
+        <ion-card-header>
+          Cliente
+        </ion-card-header>
+        <ion-item>
+          <h2>{{cliente?.nome}}</h2>
+          <p>{{cliente?.email}}</p>
+        </ion-item>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        Endereço de entrega
+      </ion-card-header>
+    
+      <ion-item>
+        <h2>{{endereco?.logradouro}}, {{endereco?.numero}}</h2>
+        <p>{{endereco?.complemento}} {{endereco?.bairro}} CEP {{endereco?.cep}}</p>
+        <p>{{endereco?.cidade.nome}}, {{endereco?.cidade.estado.nome}}</p>
+      </ion-item>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        Pagamento
+      </ion-card-header>
+    
+      <ion-item *ngIf="ordemServico.pagamento['@type']=='pagamentoComCartao'">
+        <h3>Pagamento com cartão</h3>
+        <p>Parcelas: {{ordemServico.pagamento.numeroDeParcelas}}</p>
+      </ion-item>
+      <ion-item *ngIf="ordemServico.pagamento['@type']=='pagamentoComBoleto'">
+        <h3>Pagamento com boleto</h3>
+      </ion-item>
+    </ion-card>
+
+    <button ion-button block (click)="checkout()">Confirmar Ordem de Serviço</button>
+    <button ion-button block outline (click)="back()">Voltar</button>
+  </div>
+
+  <div *ngIf="codordemServico">
+    <ion-card>
+        <ion-card-header>
+          Ordem de Serviço registrada!
+        </ion-card-header>
+        <ion-item>
+          <h2>Código: {{codordemServico}}</h2>
+          <p>Verifique seu email</p>
+        </ion-item>
+    </ion-card>
+
+    <button ion-button block outline (click)="home()">Voltar</button>
+  </div>
+
+</ion-content>

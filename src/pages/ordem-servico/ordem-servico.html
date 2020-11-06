@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Ordens de Serviço</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-list>
+    <button ion-item *ngFor="let ordem of ordensServico" (click)="showDetail(ordem.id)">
+      <ion-thumbnail item-start>
+        <img [src]="ordem.imageUrl || 'assets/imgs/blank.jpg'">
+      </ion-thumbnail>
+      <h2><b>{{ ordem.descricao }}</b></h2>
+      <p> {{ ordem.dataAbertura | date: 'dd/MM/yyyy HH:mm'}} </p>
+      <p> {{ ordem.cliente.nome }}</p>
+    </button>
+  </ion-list>
+</ion-content>
